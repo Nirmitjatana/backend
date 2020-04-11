@@ -7,10 +7,26 @@
 </head>
 
 <body>
-    <form action="../api/routes/user/signup.js" method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" id="formElem">
         Email :<input type="email" name="email"/>
         Password : <input type="password" name="password">
-        <input type="submit">
-    </form>        
+        <input type="submit" value="ok">
+    </form>
+    
+    
+    <script>
+        formElem.onsubmit = async (e) => {
+          e.preventDefault();
+      
+          let response = await fetch('../api/routes/user', {
+            method: 'POST',
+            body: new FormData(formElem)
+          });
+      
+          let result = await response.json();
+      
+          alert(result.message);
+        };
+      </script>
 </body>
 </html>
