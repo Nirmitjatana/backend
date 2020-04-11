@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
 
+var upload = multer();
 
 const User =require('../models/user');
 
@@ -57,7 +58,7 @@ router.post('/login',(req,res,next)=>{
 });
 
 
-router.post('/signup',(req,res,next)=>{
+router.post('/signup',upload.none(),(req,res,next)=>{
     // console.log('first');
     console.log(req.body.email);//to check if it's working
     User.find({email:req.body.email})
